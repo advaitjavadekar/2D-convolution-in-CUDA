@@ -193,7 +193,7 @@ int main(int argc, char** argv)
 	cout << "Launching kernel";
 
 	//launch kernel on GPU_
-	conv2D <<<num_threadblocks, threads_per_block >>> (d_c,d_a,d_h,arows,acols,hrows,hcols);
+	conv2D <<<num_threadblocks+num_threadblocks%threads_per_block, threads_per_block >>> (d_c,d_a,d_h,arows,acols,hrows,hcols);
 	err = cudaGetLastError();
 
 	if (err != cudaSuccess)
